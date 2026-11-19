@@ -1,21 +1,28 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import bookStoreImage from "../assets/book-store-img.png";
+import apiMonitorImage from "../assets/api-monitor-dashboard-img.png";
 
 const projects = [
   {
     number: "01",
     title: "MERN Book Store",
+    image: bookStoreImage,
     description:
       "A full-stack book store application with authentication, book management and an admin dashboard.",
     accent: "blue",
+    clientRepo: "https://github.com/krupa-r-108/bookStore_client",
+    serverRepo: "https://github.com/krupa-r-108/bookStore_server",
   },
   {
     number: "02",
     title: "E-commerce & API Monitoring",
+    image: apiMonitorImage,
     description:
       "Building an e-commerce platform alongside a backend API monitoring system.",
     status: "In Progress",
     accent: "mint",
+    backendRepo: "https://github.com/krupa-r-47/backend",
   },
 ];
 
@@ -30,6 +37,8 @@ const skills = [
   'Git',
   'PM2',
 ];
+
+const resumeUrl = import.meta.env.VITE_RESUME_URL;
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -100,7 +109,7 @@ function App() {
               <a className="button button-primary" href="#projects">
                 View Projects
               </a>
-              <a className="button button-secondary" href="#" aria-label="Download resume (link to be added)">
+              <a className="button button-secondary" href={resumeUrl} target="_blank" rel="noreferrer" aria-label="View resume">
                 Download Resume
               </a>
             </div>
@@ -142,7 +151,7 @@ function App() {
 
     <div className="timeline">
       <div className="timeline-item">
-        <span className="timeline-year">March 2025  May 2025</span>
+        <span className="timeline-year">March 2025 - May 2025</span>
         <div>
           <h3>
             Frontend Developer Intern <small>Mettsenia Solutions Pvt. Ltd.</small>
@@ -155,7 +164,7 @@ function App() {
       </div>
 
       <div className="timeline-item">
-        <span className="timeline-year">May 2025  Present</span>
+        <span className="timeline-year">May 2025 - Present</span>
         <div>
           <h3>
             Backend Developer <small>Mettsenia Solutions Pvt. Ltd.</small>
@@ -188,13 +197,31 @@ function App() {
             {projects.map((project) => (
               <article className="project-card" key={project.number}>
                 <div className={`project-visual ${project.accent}`}>
+                  <img
+                    className="project-image"
+                    src={project.image}
+                    alt={`${project.title} project preview`}
+                  />
                   <span className="project-number">{project.number}</span>
-                  <span className="project-arrow">↗</span>
-                  <div className="visual-lines"></div>
+                  <span className="project-arrow">{"\u2197"}</span>
+
                 </div>
                 <div className="project-info">
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
+                  {(project.clientRepo || project.serverRepo || project.backendRepo) && (
+                    <div className="project-links">
+                      {project.clientRepo && (
+                        <a href={project.clientRepo} target="_blank" rel="noreferrer">Client repository <span aria-hidden="true">{"\u2197"}</span></a>
+                      )}
+                      {project.serverRepo && (
+                        <a href={project.serverRepo} target="_blank" rel="noreferrer">Server repository <span aria-hidden="true">{"\u2197"}</span></a>
+                      )}
+                      {project.backendRepo && (
+                        <a href={project.backendRepo} target="_blank" rel="noreferrer">Backend repository <span aria-hidden="true">{"\u2197"}</span></a>
+                      )}
+                    </div>
+                  )}
                   {project.status && (
                     <div className="tag-list">
                       <span className="project-status">{project.status}</span>
@@ -261,6 +288,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
 
 
 
