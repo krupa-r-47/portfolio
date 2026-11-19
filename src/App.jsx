@@ -109,9 +109,11 @@ function App() {
               <a className="button button-primary" href="#projects">
                 View Projects
               </a>
-              <a className="button button-secondary" href={resumeUrl} target="_blank" rel="noreferrer" aria-label="View resume">
-                Download Resume
-              </a>
+              {resumeUrl && (
+                <a className="button button-secondary" href={resumeUrl} target="_blank" rel="noreferrer" aria-label="View resume">
+                  Download Resume
+                </a>
+              )}
             </div>
           </div>
         </section>
@@ -288,6 +290,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
